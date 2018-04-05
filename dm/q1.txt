@@ -1,0 +1,21 @@
+import numpy as np
+import pandas as pd
+import sklearn as skl
+
+!cd
+
+file=pd.read_csv('prac/people.csv')
+file
+
+file.values
+
+rules=[lambda x: True if int(x[0])>=0 and int(x[0])<=150 else False,
+       lambda x: True if int(x[0])>int(x[4]) else False,
+       lambda x: True if x[3]=='single' or x[3]=='married' or x[3]=='widowed' else False,
+       lambda x: True if (int(x[0])<=18 and x[1]=='child') or (int(x[0])>18 and int(x[0])<=65 and x[1]=='adult')
+                       or (int(x[0])>65 and x[1]=='elderly') else False ]
+
+
+for i in range(5):
+    print('row '+str(i+1))
+    print(rules[0](file.values[i]))
